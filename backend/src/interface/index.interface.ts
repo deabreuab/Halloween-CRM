@@ -21,3 +21,13 @@ export interface IUser {
   modifiedAt?:Date;
   modifiedBy?:string;
 }
+
+export interface IOpportunities {
+  photo: string;
+  description: string;
+  type: string;
+  user_id: object;
+  status: 'new' | 'in_progress' | 'closed';
+  start_date: Date;
+  end_date: Date;
+} 
