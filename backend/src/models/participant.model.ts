@@ -1,28 +1,22 @@
 import mongoose, { Schema, model, connect } from 'mongoose';
-import { IParticipant } from '../interface/index.interface';
+
+
+interface IParticipant {
+    email:string;
+    name:string;
+    createdBy:string; // creado por (persona)
+    modifiedBy?:string; // modificado por (persona)
+}
+
 
 const  ParticipantSchema = new Schema<IParticipant>({
-  email: { type: String, required: true },
-  name: { type: String, required: true },
-  //createdAt :{type:Date,default:Date.now},
-  createdBy:{type:String},
-  //modifiedAt:{type:Date,default:Date.now},
-  modifiedBy:{type:String}
-},{timestamps:true})
+    email: { type: String, required: true },
+    name: { type: String, required: true },
+    createdBy:{type:String,required: true},
+    modifiedBy:{type:String}
+},{timestamps:true}) // añade automaticamento createAt y updateAt
 
-ParticipantSchema.pre('save',function(next){
-  if(!this.modifiedAt){
-    this.modifiedAt = new Date();
-  }
-  next();
-})
 
-const Participant = mongoose.model<IParticipant>('Participant', ParticipantSchema);
-
-const participant = new Participant({
-  email:"rosa@gmail.com",
-  name:"rosa",
-  createdBy:"maria",
-});
+const Participant = mongoose.model<IParticipant>('Participant',ParticipantSchema);
  
-export { participant };
+export default Participant;
