@@ -1,4 +1,4 @@
-import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 const TopBar: React.FC = () => {
   const drawerWidth = 240;
@@ -11,10 +11,9 @@ const TopBar: React.FC = () => {
         backgroundColor: "#467E91",
       }}
     >
-      <Toolbar>
-        <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          Colaboradores
-        </Typography>
+      <Toolbar
+        sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}
+      >
         <IconButton color="inherit">
           <NotificationsNoneIcon />
         </IconButton>
