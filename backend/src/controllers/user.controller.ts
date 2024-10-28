@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Users } from "../models/user.models";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const encryptedPassword = async (password:string) =>{
     const salt = await bcrypt.genSalt(10);
@@ -22,15 +23,33 @@ export const createUser = async (req: Request, resp: Response) => {
     }
 };
 
-export const loginUser = async (req: Request, resp: Response): Promise<void> => {
+export const loginUser = async (req: Request, resp: Response): Promise<any> => {
     try {
         const { email, password } = req.body;
-        resp.status(200).json({message: "Acceso verificado"});
+        if(!email || !password){
+            return resp.status(400).json({ message: "Correo y contraseña son obligatorios" });
+        };
+        const findUser = await Users.findOne({email: email}).exec();
+        if (!findUser) {
+            return resp.status(404).json({ message: "No se encontró el usuario" });
+        }
+        const loginUser = await comparePassword(password, findUser.password)
+        if(!loginUser){
+            return resp.status(401).json({ message: "Contraseña incorrecta" });
+        }
+        if(!process.env.JWT_SECRET){
+            return resp.status(401).json({ message: "Variable de entorno JWT_SECRET no configurada" });
+        }
+        const payload = {
+            email: findUser.email,
+            role: findUser.role
+        };
+        const token = await jwt.sign(payload, process.env.JWT_SECRET);
+        resp.status(200).json({message: "Acceso verificado", token});
     } catch (error) {
         resp.status(500).json({message: "Error del servidor"})
     }
 }
-
 
 export const getUser = async (req: Request, resp: Response) => {
     try {
