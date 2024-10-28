@@ -44,7 +44,7 @@ export interface ITickets {
 }
 
 export interface Itasks{
-  collaborator_id: mongoose.Types.ObjectId,
+  user_id: mongoose.Types.ObjectId,
   opportunity_id: mongoose.Types.ObjectId,
   id: mongoose.Types.ObjectId,
   title: string;
