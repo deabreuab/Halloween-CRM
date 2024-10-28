@@ -12,7 +12,6 @@ app.get("/", (req: Request, resp: Response) => {
 
 const startServer = async () =>{
   await connectMongo();
-
   app.listen(PORT, (): void => {
     console.log('SERVER IS UP ON PORT:', PORT);
   });

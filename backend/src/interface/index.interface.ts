@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export interface IParticipant {
   email:string;
   name:string;
@@ -8,7 +10,8 @@ export interface IParticipant {
 }
 
 export interface IUser {
-  id?: number;
+  // id?: number;
+  _id?: mongoose.Types.ObjectId;
   name: string;
   email: string;
   photo: string;
@@ -16,8 +19,8 @@ export interface IUser {
   password: string;
   company: string;
   role: 'admin' | 'collaborator';
-  createdAt: Date; 
-  createdBy:string;
+  // createdAt?: Date; 
+  createdBy?:string;
   modifiedAt?:Date;
   modifiedBy?:string;
 }
