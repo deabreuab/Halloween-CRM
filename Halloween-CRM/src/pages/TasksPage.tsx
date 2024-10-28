@@ -1,10 +1,9 @@
 import AddButton from "../components/AddButton";
-import CollaboratorsTable from "../components/CollaboratorTable";
 import Layout from "../components/Layout";
-import SearchBar from "../components/SearchBar";
 import { Box, Pagination } from "@mui/material";
+import TasksTable from "../components/TasksTable";
 
-const CollaboratorsPage: React.FC = () => {
+const TasksPage: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 3 }}>
@@ -17,18 +16,17 @@ const CollaboratorsPage: React.FC = () => {
             fontFamily: "Roboto, sans-serif",
           }}
         >
-          Colaboradores
+          Tareas
         </h1>
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            justifyContent: "flex-end",
+
             marginBottom: 2,
           }}
         >
-          <SearchBar />
-          <AddButton label="Nuevo colaborador" />
+          <AddButton label="Agregar Tarea" />
         </Box>
         <Box
           sx={{
@@ -38,7 +36,7 @@ const CollaboratorsPage: React.FC = () => {
             alignItems: "flex-end",
           }}
         >
-          <CollaboratorsTable collaborators={[]} />
+          <TasksTable />
           <Pagination />
         </Box>
       </Box>
@@ -46,4 +44,4 @@ const CollaboratorsPage: React.FC = () => {
   );
 };
 
-export default CollaboratorsPage;
+export default TasksPage;

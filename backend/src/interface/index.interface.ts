@@ -42,3 +42,18 @@ export interface ITickets {
   opportunity_id: mongoose.Types.ObjectId,
   quantity: Number
 }
+
+export interface Itasks{
+  user_id: mongoose.Types.ObjectId,
+  opportunity_id: mongoose.Types.ObjectId,
+  id: mongoose.Types.ObjectId,
+  title: string;
+  description: string;
+  status: string;
+  due_date: Date;
+  assigned_date: Date;
+  createdBy?:string;
+  modifiedAt?:Date;
+  modifiedBy?:string;
+}
+
