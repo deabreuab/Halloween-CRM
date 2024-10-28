@@ -25,4 +25,4 @@ const participant = new Participant({
   createdBy:"maria",
 });
  
-export {participant};
+export { participant };
