@@ -1,7 +1,16 @@
-import express, { Application } from 'express';
+
 import connectMongo from './connection';
 import Participant from './models/participant.model';
+import express, { Application, Request, Response } from 'express';
+// import {authMiddleware} from './middleware/auth.middleware';
 
+const app: Application = express();
+const PORT: number = parseInt(process.env.PORT || '8001');
+const secret: string = process.env.SECRET || 'secret';
+// const auth = authMiddleware(secret);
+// app.use(auth);
+
+router(app);
 
 const app: Application = express();
 const PORT: number = 8000;

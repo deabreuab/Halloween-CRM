@@ -57,3 +57,8 @@ export interface Itasks{
   modifiedBy?:string;
 }
 
+export interface DecodedToken {
+  _id: string;
+  role: string;
+  email: string;
+}
