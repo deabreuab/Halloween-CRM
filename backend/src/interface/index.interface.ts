@@ -33,4 +33,6 @@ export interface IOpportunities {
   status: 'new' | 'in_progress' | 'closed';
   start_date: Date;
   end_date: Date;
+  createBy: string;
+  modifiedBy: string;
 } 
