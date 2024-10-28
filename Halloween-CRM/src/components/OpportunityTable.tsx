@@ -12,7 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useEffect, useState } from "react";
-interface Opportunity {
+export interface Opportunity {
   name: string;
   description: string;
   type: string;
