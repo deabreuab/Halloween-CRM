@@ -42,3 +42,9 @@ export interface ITickets {
   opportunity_id: mongoose.Types.ObjectId,
   quantity: Number
 }
+
+export interface DecodedToken {
+  _id: string;
+  role: string;
+  email: string;
+}
