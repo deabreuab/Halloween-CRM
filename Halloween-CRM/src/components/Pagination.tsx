@@ -10,13 +10,13 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
-  onPageChange,
+ // onPageChange,
 }) => {
   return (
     <MuiPagination
       count={totalPages}
       page={currentPage}
-      onChange={(_, page) => onPageChange(page)}
+     // onChange={(_, page) => onPageChange(page)}
     />
   );
 };
