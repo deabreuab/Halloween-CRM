@@ -60,22 +60,19 @@ const CollaboratorsTable: React.FC<CollaboratorsTableProps> = () => {
   const [loading, setLoading] = useState<boolean>(false); // Cambia a true si necesitas simular la carga
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
-    const fetchCollaborators = () => {
+    const fetchCollaborators = async () => {
       setLoading(true);
-      new Promise<Collaborator[]>((resolve) => {
-        setTimeout(() => {
-          resolve(mockData); // Devuelve los datos simulados después de un retraso
-        }, 1000);
-      })
-        .then((data) => {
-          setCollaborators(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setError("Error al cargar los colaboradores");
-          setLoading(false);
-        });
+      try {
+        // Simulando un retraso en la carga
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        setCollaborators(mockData);
+      } catch (error: any) {
+        setError("Error al cargar los colaboradores");
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchCollaborators();
   }, []);
 
