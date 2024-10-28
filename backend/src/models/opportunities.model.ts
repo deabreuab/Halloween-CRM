@@ -9,7 +9,7 @@ const opportunitiesSchema = new Schema<IOpportunities>({
     status: { type: String, enum: ['new', 'in_progress', 'closed'], default: 'new' },
     start_date: { type: Date, required: true, default: Date.now },
     end_date: { type: Date, required: true },
-    createBy: { type: String, required: true },
+    createBy: { type: String, required: true, default: 'system' },
     modifiedBy: { type: String },
   },{timestamps:true});
   
