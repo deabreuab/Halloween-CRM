@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Sidebar />
       <Box sx={{ flexGrow: 1 }}>
         <TopBar />
-        <Box component="main" sx={{ padding: 3, mt: 10 }}>
+        <Box component="main" sx={{ mt: 4 }}>
           {children}
         </Box>
       </Box>
