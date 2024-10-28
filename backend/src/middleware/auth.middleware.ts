@@ -18,9 +18,8 @@ export const authMiddleware = (secret: string) => (req: Request, resp: Response,
   
       jwt.verify(token, secret, (err, decoded) => {
         if (err) {
-          return next();  // Puedes responder aquí con un estado 403, según lo que prefieras
+          return next(403);
         }
-  
         const decodedToken = decoded as DecodedToken;
         req.uid = decodedToken._id;
         req.role = decodedToken.role;
@@ -36,8 +35,12 @@ export const authMiddleware = (secret: string) => (req: Request, resp: Response,
   export const isAuthenticated = (req: Request): boolean => !!req.uid;
   
   // Función auxiliar para verificar si el usuario es administrador
-  export const isAdmin = (req: Request): boolean => req.role === "admin";
-  
+  export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+    if (req.role === 'admin') {
+      return next();
+    }
+    return res.status(401).json({ message: 'No autorizado' });
+  };  
   // Middleware para requerir autenticación
   export const requireAuth = (req: Request, resp: Response, next: NextFunction): void | Response => {
     if (!isAuthenticated(req)) {
