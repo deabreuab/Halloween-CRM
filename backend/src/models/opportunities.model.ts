@@ -1,17 +1,18 @@
 import mongoose, { Schema } from "mongoose";
 import { IOpportunities } from "../interface/index.interface";
-// Table opportunities {
-//     id: integer
-//     photo: string
-//     description: string
-//     type: string
-//     collaborator_id: string
-//     status: enum(new, in_progress, closed)
-//     start_date: datetime 
-//     end_date: datetime
-//   }
   
-const opportunitiesSchema = new Schema({
+const opportunitiesSchema = new Schema<IOpportunities>({
+    photo: { type: String, default: 'default_photo.jpg' },
+    description: { type: String, required: true },
+    type: { type: String, required: true},
+    user_id: { type: mongoose.Types.ObjectId, required: true },
+    status: { type: String, enum: ['new', 'in_progress', 'closed'], default: 'new' },
+    start_date: { type: Date, required: true, default: Date.now },
+    end_date: { type: Date, required: true },
+    createBy: { type: String, required: true },
+    modifiedBy: { type: String },
+  },{timestamps:true});
+  
+  const Opportunities = mongoose.model<IOpportunities>('Opportunities', opportunitiesSchema);
 
-})
-  
+  export { Opportunities };

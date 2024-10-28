@@ -29,8 +29,16 @@ export interface IOpportunities {
   photo: string;
   description: string;
   type: string;
-  user_id: object;
+  user_id: mongoose.Types.ObjectId;
   status: 'new' | 'in_progress' | 'closed';
   start_date: Date;
   end_date: Date;
+  createBy: string;
+  modifiedBy: string;
 } 
+
+export interface ITickets {
+  participant_id: mongoose.Types.ObjectId,
+  opportunity_id: mongoose.Types.ObjectId,
+  quantity: Number
+}
