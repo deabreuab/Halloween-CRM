@@ -9,4 +9,4 @@ function router(app:Application): void {
   routes.use('/opportunities', opportunitiesRouter);
 }
 
-export {router};
+export { router };
