@@ -1,10 +1,9 @@
 import AddButton from "../components/AddButton";
 import Layout from "../components/Layout";
-import ParticipantTable from "../components/ParticipantTable";
-import SearchBar from "../components/SearchBar";
 import { Box, Pagination } from "@mui/material";
+import TasksTable from "../components/TasksTable";
 
-const ParticipantsPage: React.FC = () => {
+const TasksPage: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 3 }}>
@@ -17,20 +16,18 @@ const ParticipantsPage: React.FC = () => {
             fontFamily: "Roboto, sans-serif",
           }}
         >
-          Participantes
+          Tareas
         </h1>
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            justifyContent: "flex-end",
+
             marginBottom: 2,
           }}
         >
-          <SearchBar />
-          <AddButton label="Añadir Participante" />
+          <AddButton label="Agregar Tarea" />
         </Box>
-
         <Box
           sx={{
             display: "flex",
@@ -39,7 +36,7 @@ const ParticipantsPage: React.FC = () => {
             alignItems: "flex-end",
           }}
         >
-          <ParticipantTable participants={[]} />
+          <TasksTable />
           <Pagination />
         </Box>
       </Box>
@@ -47,4 +44,4 @@ const ParticipantsPage: React.FC = () => {
   );
 };
 
-export default ParticipantsPage;
+export default TasksPage;

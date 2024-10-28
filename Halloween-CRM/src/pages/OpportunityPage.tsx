@@ -1,5 +1,4 @@
-import AddBotton from "../components/AddBotton";
-
+import AddButton from "../components/AddButton";
 import Layout from "../components/Layout";
 import OpportunityTable from "../components/OpportunityTable";
 
@@ -30,7 +29,7 @@ const OpportunityPage: React.FC = () => {
           }}
         >
           <SearchBar />
-          <AddBotton />
+          <AddButton label="Nueva Oportunidad" />
         </Box>
 
         <Box

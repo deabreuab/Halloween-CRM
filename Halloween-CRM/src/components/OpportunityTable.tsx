@@ -14,53 +14,59 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 interface Opportunity {
   name: string;
+  description: string;
   type: string;
   status: string;
-  fechaInicio: string;
-  fechaCierre: string;
-  responsable: string;
+  start_date: string;
+  end_date: string;
+  createBy: string;
 }
 
 const mockOpportunities: Opportunity[] = [
   {
     name: "Proyecto Alpha",
+    description: "Prospecto con potencial de nuevo cliente.",
     type: "Nuevo Cliente",
     status: "En Progreso",
-    fechaInicio: "2024-01-15",
-    fechaCierre: "2024-03-20",
-    responsable: "Carlos Mendoza",
+    start_date: "2024-01-15",
+    end_date: "2024-03-20",
+    createBy: "Carlos Mendoza",
   },
   {
     name: "Expansión Beta",
+    description: "Expansión de servicios para cuenta actual.",
     type: "Expansión de Cuenta",
     status: "Completada",
-    fechaInicio: "2023-10-05",
-    fechaCierre: "2024-01-10",
-    responsable: "Lucía Fernández",
+    start_date: "2023-10-05",
+    end_date: "2024-01-10",
+    createBy: "Lucía Fernández",
   },
   {
     name: "Renovación Gamma",
+    description: "Renovación anual del contrato.",
     type: "Renovación",
     status: "Pendiente",
-    fechaInicio: "2024-02-01",
-    fechaCierre: "2024-06-30",
-    responsable: "Miguel Hernández",
+    start_date: "2024-02-01",
+    end_date: "2024-06-30",
+    createBy: "Miguel Hernández",
   },
   {
     name: "Desarrollo Delta",
+    description: "Desarrollo de nueva herramienta personalizada.",
     type: "Nuevo Proyecto",
     status: "En Progreso",
-    fechaInicio: "2024-03-01",
-    fechaCierre: "2024-05-30",
-    responsable: "Sofía Ruiz",
+    start_date: "2024-03-01",
+    end_date: "2024-05-30",
+    createBy: "Sofía Ruiz",
   },
   {
     name: "Proyecto Épsilon",
+    description: "Recuperación de cliente recurrente.",
     type: "Cliente Recurrente",
     status: "Cancelada",
-    fechaInicio: "2024-01-20",
-    fechaCierre: "2024-02-15",
-    responsable: "José Gómez",
+    start_date: "2024-01-20",
+    end_date: "2024-02-15",
+    createBy: "José Gómez",
   },
 ];
 
@@ -83,9 +89,10 @@ const OpportunityTable: React.FC = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>name</TableCell>
-            <TableCell>type</TableCell>
-            <TableCell>status</TableCell>
+            <TableCell>Nombre</TableCell>
+            <TableCell>Descripción</TableCell>
+            <TableCell>Tipo</TableCell>
+            <TableCell>Estado</TableCell>
             <TableCell>Fecha Inicio</TableCell>
             <TableCell>Fecha Cierre</TableCell>
             <TableCell>Responsable</TableCell>
@@ -96,11 +103,12 @@ const OpportunityTable: React.FC = () => {
           {data.map((opportunity, index) => (
             <TableRow key={index}>
               <TableCell>{opportunity.name}</TableCell>
+              <TableCell>{opportunity.description}</TableCell>
               <TableCell>{opportunity.type}</TableCell>
               <TableCell>{opportunity.status}</TableCell>
-              <TableCell>{opportunity.fechaInicio}</TableCell>
-              <TableCell>{opportunity.fechaCierre}</TableCell>
-              <TableCell>{opportunity.responsable}</TableCell>
+              <TableCell>{opportunity.start_date}</TableCell>
+              <TableCell>{opportunity.end_date}</TableCell>
+              <TableCell>{opportunity.createBy}</TableCell>
               <TableCell id="acciones">
                 <IconButton>
                   <VisibilityIcon />

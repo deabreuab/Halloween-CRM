@@ -1,4 +1,4 @@
-import AddBotton from "../components/AddBotton";
+import AddButton from "../components/AddButton";
 import CollaboratorsTable from "../components/CollaboratorTable";
 import Layout from "../components/Layout";
 import SearchBar from "../components/SearchBar";
@@ -28,7 +28,7 @@ const CollaboratorsPage: React.FC = () => {
           }}
         >
           <SearchBar />
-          <AddBotton />
+          <AddButton label="Nuevo colaborador" />
         </Box>
         <Box
           sx={{
