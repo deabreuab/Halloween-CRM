@@ -1,10 +1,11 @@
 import AddBotton from "../components/AddBotton";
-import CollaboratorsTable from "../components/CollaboratorTable";
+
 import Layout from "../components/Layout";
+import ParticipantTable from "../components/ParticipantTable";
 import SearchBar from "../components/SearchBar";
 import { Box, Pagination } from "@mui/material";
 
-const CollaboratorsPage: React.FC = () => {
+const ParticipantsPage: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 3 }}>
@@ -17,7 +18,7 @@ const CollaboratorsPage: React.FC = () => {
             fontFamily: "Roboto, sans-serif",
           }}
         >
-          Colaboradores
+          Participantes
         </h1>
         <Box
           sx={{
@@ -30,6 +31,7 @@ const CollaboratorsPage: React.FC = () => {
           <SearchBar />
           <AddBotton />
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -38,7 +40,7 @@ const CollaboratorsPage: React.FC = () => {
             alignItems: "flex-end",
           }}
         >
-          <CollaboratorsTable collaborators={[]} />
+          <ParticipantTable participants={[]} />
           <Pagination />
         </Box>
       </Box>
@@ -46,4 +48,4 @@ const CollaboratorsPage: React.FC = () => {
   );
 };
 
-export default CollaboratorsPage;
+export default ParticipantsPage;
