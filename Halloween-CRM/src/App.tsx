@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Login } from "./components/Login";
 import CollaboratorsPage from "./pages/CollaboratorsPage";
-
 import { Register } from "./components/Register";
 
 function App() {
