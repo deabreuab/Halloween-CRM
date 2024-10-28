@@ -5,7 +5,7 @@ const opportunitiesSchema = new Schema<IOpportunities>({
     photo: { type: String, default: 'default_photo.jpg' },
     description: { type: String, required: true },
     type: { type: String, required: true},
-    user_id: { type: mongoose.Types.ObjectId, required: true },
+    user_id: {  type: Schema.Types.ObjectId, required: true },
     status: { type: String, enum: ['new', 'in_progress', 'closed'], default: 'new' },
     start_date: { type: Date, required: true, default: Date.now },
     end_date: { type: Date, required: true },
