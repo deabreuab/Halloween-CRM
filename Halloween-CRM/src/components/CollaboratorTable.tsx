@@ -63,7 +63,6 @@ const CollaboratorsTable: React.FC<CollaboratorsTableProps> = () => {
     const fetchCollaborators = async () => {
       setLoading(true);
       try {
-        // Simulando un retraso en la carga
         await new Promise((resolve) => setTimeout(resolve, 1000));
         setCollaborators(mockData);
       } catch (error: any) {
