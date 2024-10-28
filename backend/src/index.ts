@@ -1,6 +1,7 @@
+
+import connectMongo from './connection';
+import Participant from './models/participant.model';
 import express, { Application, Request, Response } from 'express';
-import {connectMongo} from './connection';
-import { router } from './routes/index.routes';
 // import {authMiddleware} from './middleware/auth.middleware';
 
 const app: Application = express();
@@ -11,15 +12,22 @@ const secret: string = process.env.SECRET || 'secret';
 
 router(app);
 
-app.get("/", (req: Request, resp: Response) => {
-  resp.send("connection mongodb")
-});
+const app: Application = express();
+const PORT: number = 8000;
 
 const startServer = async () =>{
-  await connectMongo();
-  app.listen(PORT, (): void => {
-    console.log('SERVER IS UP ON PORT:', PORT);
-  });
+    await connectMongo();
+    const participant = new Participant({
+        email:"rosa@gmail.com",
+        name:"rosa",
+        createdBy:"maria",
+    });
+    await participant.save();
+    console.log(participant)
+    app.listen(PORT, (): void => {
+        console.log('SERVER IS UP ON PORT:', PORT);
+    });
 }
+
 
 startServer();

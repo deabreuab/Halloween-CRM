@@ -4,10 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx tsc && node ./build/index.js",
-    "dev": "nodemon index.ts",
-    "build": "tsc && cp ./src/*.js ./build",
-    "devts": "concurrently \"tsc --watch\" \"ts-node-dev --respawn ./src/index.ts\""
+    "start": "node ./build/index.js",
+    "dev": "nodemon --watch src -e ts --exec \"ts-node src/index.ts\"",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
