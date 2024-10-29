@@ -52,7 +52,8 @@ export const loginUser = async (req: Request, resp: Response): Promise<any> => {
             return resp.status(401).json({ message: "Variable de entorno JWT_SECRET no configurada" });
         }
         const payload = {
-            id: findUser._id,
+            _id: findUser._id,
+            email: findUser.email,
             role: findUser.role
         };
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
