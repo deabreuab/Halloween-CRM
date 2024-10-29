@@ -10,19 +10,7 @@ const  ParticipantSchema = new Schema<IParticipant>({
   modifiedBy:{type:String}
 },{timestamps:true})
 
-ParticipantSchema.pre('save',function(next){
-  if(!this.modifiedAt){
-    this.modifiedAt = new Date();
-  }
-  next();
-})
-
 const Participant = mongoose.model<IParticipant>('Participant', ParticipantSchema);
 
-const participant = new Participant({
-  email:"rosa@gmail.com",
-  name:"rosa",
-  createdBy:"maria",
-});
  
-export { participant };
+export { Participant };
