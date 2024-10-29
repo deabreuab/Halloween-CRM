@@ -1,9 +1,9 @@
 import express, { Router } from 'express';
-import { createUser, getUser, getUserById, loginUser, updateUser, deleteUser } from '../controllers/user.controller';
+import {createUser, getUser, getUserById, loginUser, updateUser, deleteUser, registerUser } from '../controllers/user.controller';
 import { isAdmin,authMiddleware,isCollaborator } from '../middleware/auth.middleware';
-
 const routerUser: Router = express.Router();
 
+routerUser.post('/register', registerUser); 
 routerUser.post('/',authMiddleware, isAdmin, createUser);
 routerUser.get('/', authMiddleware, isCollaborator, getUser);
 routerUser.get('/:id', authMiddleware, isCollaborator, getUserById);
