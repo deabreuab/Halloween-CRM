@@ -1,15 +1,24 @@
 import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { useEffect,useState } from "react";
 // import { deepOrange, deepPurple } from "@mui/material/colors";
 
 const TopBar: React.FC = () => {
   const drawerWidth = 240;
-  const userName = localStorage.getItem("userName");
+  const [userName, setUserName] = useState<string | null>(
+    localStorage.getItem("userName")
+  );
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem("userName");
+    setUserName(storedUserName);
+  }, []);
 
   const getInitials = (name: string | null) => {
     if (!name) return "";
     return name.charAt(0).toUpperCase();
   };
+
 
   const generateRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -21,7 +30,7 @@ const TopBar: React.FC = () => {
   };
   const initials = getInitials(userName);
   const avatarColor = generateRandomColor();
-  
+
   return (
     <AppBar
       position="fixed"
