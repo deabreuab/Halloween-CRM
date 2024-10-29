@@ -6,7 +6,7 @@ import {
     getParticipantByIdService,
     updateParticipantService,
     deleteParticipantService
-} from '../services/participant.service';
+} from '../services/participant.services';
 
 const createParticipant = async (req: Request, res: Response) => {
     const { email, name, createdBy } = req.body;

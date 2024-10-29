@@ -6,7 +6,7 @@ const app: Application = express();
 const PORT: number = parseInt(process.env.PORT || '3000');
 app.use(express.json())
 const secret: string = process.env.secret || 'secret';
-authMiddleware(secret);
+app.use(authMiddleware(secret));
 router(app);
 
 app.get("/", (req: Request, resp: Response) => {
