@@ -26,7 +26,7 @@ export interface IUser {
 }
 
 export interface IOpportunities {
-  photo: string;
+  name: string;
   description: string;
   type: string;
   user_id: mongoose.Types.ObjectId;

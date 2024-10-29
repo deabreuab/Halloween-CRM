@@ -2,10 +2,10 @@ import type { RequestHandler } from "express";
 import { createAnOpportunity, getOpportunities, getAnOpportunity, updateAnOpportunity, deleteAnOpportunity } from "../services/opportunities.services";
 
 const createOpportunityHandler: RequestHandler = async (req, res) => {
-    const { photo, description, type, user_id, start_date, end_date, createBy, modifiedBy } = req.body;
+    const { name, description, type, user_id, start_date, end_date, createBy, modifiedBy } = req.body;
 
     try {
-        const createdOpportunity = await createAnOpportunity(photo, description, type, user_id, start_date, end_date, createBy, modifiedBy);
+        const createdOpportunity = await createAnOpportunity(name, description, type, user_id, start_date, end_date, createBy, modifiedBy);
         res.status(201).json({ message: "Opportunidad creada con éxito", created: createdOpportunity});
     } catch (error) {
         res.status(500).json({ message: "Error al crear la oportunidad", error });
@@ -14,10 +14,10 @@ const createOpportunityHandler: RequestHandler = async (req, res) => {
 
 const updateOpportunityHandler: RequestHandler = async (req, res) =>{
     const id = req.params.id as string;
-    const { photo, description, type, start_date, end_date, modifiedBy } = req.body;
+    const { name, description, type, start_date, end_date, modifiedBy } = req.body;
 
     try {
-        const updatedOpportunity = await updateAnOpportunity(id, photo, description, type, start_date, end_date, modifiedBy)
+        const updatedOpportunity = await updateAnOpportunity(id, name, description, type, start_date, end_date, modifiedBy)
         res.status(200).json({ message: "Oportunidad actualizada con éxito", updatedOpportunity: updatedOpportunity });
     } catch (error) {
         res.status(500).json({ message: "Error al actualizar la oportunidad", error }); 
