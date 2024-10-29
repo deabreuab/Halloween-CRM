@@ -14,7 +14,7 @@ const comparePassword = async (password:string, passwordHash:string) =>{
 export const createUser = async (req: Request, resp: Response): Promise<any> => {
     try {
         const regexEmail = /[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}/;
-        const { name, email, password, phone, company, role, photo } = req.body;
+        const { name, email, password, phone, company, role } = req.body;
         if(!name ||!email ||!password ||!phone){
             return resp.status(400).json({ message: "Nombre, correo electrónico, teléfono, contraseña y compañía son campos obligatorios" });
         };
@@ -26,7 +26,7 @@ export const createUser = async (req: Request, resp: Response): Promise<any> => 
             return resp.status(409).json({ message: "Correo electrónico ya registrado" });
         };
         const newPassword = await encryptedPassword(password);
-        const newUser = new Users({name: name, email:email, password: newPassword, phone: phone, company: company, role: role, photo: photo || 'default_photo.jpg'});
+        const newUser = new Users({name: name, email:email, password: newPassword, phone: phone, company: company, role: role});
         await newUser.save();
         resp.status(201).json({message:"Colaborador creado", newUser});
     } catch (error) {
