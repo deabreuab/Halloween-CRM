@@ -114,14 +114,14 @@ export const getUserById = async (req: Request, resp: Response): Promise<any> =>
 export const updateUser = async (req: Request, resp: Response): Promise<any> => {
     try {
         const { id } = req.params;
-        const { name, password, phone, company, photo } = req.body;
+        const { name, password, phone, company, email } = req.body;
         const updateUser = await Users.findByIdAndUpdate(id,
             { 
                 name, 
                 password: password ? await encryptedPassword(password) : undefined, 
                 phone, 
                 company, 
-                photo 
+                email
             }, 
             { new: true }
         );
