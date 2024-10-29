@@ -54,8 +54,8 @@ export const loginUser = async (req: Request, resp: Response): Promise<any> => {
         const payload = {
             email: findUser.email,
             role: findUser.role
-        };//PASARLE CANTIDAD DE TAREAS Y FECHAS
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
+        };
+        const token = await jwt.sign(payload, process.env.JWT_SECRET);
         resp.status(200).json({message: "Acceso verificado", token});
     } catch (error) {
         resp.status(500).json({message: "Error del servidor"})
