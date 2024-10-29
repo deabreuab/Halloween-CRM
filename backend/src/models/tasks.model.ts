@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import { Itasks} from "../interface/index.interface";
   
 const tasksSchema = new Schema<Itasks>({
-    collaborator_id: { type: Schema.Types.ObjectId, required: true},
+    user_id: { type: Schema.Types.ObjectId, required: true},
     opportunity_id: {type: Schema.Types.ObjectId, required: true},
     id:{ type: Schema.Types.ObjectId},
     title: {type: String, required: true},

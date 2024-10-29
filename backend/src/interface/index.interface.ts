@@ -44,7 +44,7 @@ export interface ITickets {
 }
 
 export interface Itasks{
-  collaborator_id: mongoose.Types.ObjectId,
+  user_id: mongoose.Types.ObjectId,
   opportunity_id: mongoose.Types.ObjectId,
   id: mongoose.Types.ObjectId,
   title: string;
@@ -57,3 +57,8 @@ export interface Itasks{
   modifiedBy?:string;
 }
 
+export interface DecodedToken {
+  _id: string;
+  role: string;
+  email: string;
+}

@@ -1,10 +1,16 @@
 import AddButton from "../components/AddButton";
-import CollaboratorsTable from "../components/CollaboratorTable";
 import Layout from "../components/Layout";
+import OpportunityModal from "../components/OpportunityModal";
+import OpportunityTable from "../components/OpportunityTable";
+
 import SearchBar from "../components/SearchBar";
 import { Box, Pagination } from "@mui/material";
 
-const CollaboratorsPage: React.FC = () => {
+const OpportunityPage: React.FC = () => {
+  const handleAddOpportunity = () => {
+    OpportunityModal();
+  };
+
   return (
     <Layout>
       <Box sx={{ padding: 3 }}>
@@ -17,7 +23,7 @@ const CollaboratorsPage: React.FC = () => {
             fontFamily: "Roboto, sans-serif",
           }}
         >
-          Colaboradores
+          Oportunidades
         </h1>
         <Box
           sx={{
@@ -28,8 +34,9 @@ const CollaboratorsPage: React.FC = () => {
           }}
         >
           <SearchBar />
-          <AddButton label="Nuevo colaborador" />
+          <AddButton label="Nueva Oportunidad" onClick={handleAddOpportunity} />
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -38,7 +45,7 @@ const CollaboratorsPage: React.FC = () => {
             alignItems: "flex-end",
           }}
         >
-          <CollaboratorsTable collaborators={[]} />
+          <OpportunityTable />
           <Pagination />
         </Box>
       </Box>
@@ -46,4 +53,4 @@ const CollaboratorsPage: React.FC = () => {
   );
 };
 
-export default CollaboratorsPage;
+export default OpportunityPage;

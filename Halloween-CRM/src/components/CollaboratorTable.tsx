@@ -12,18 +12,18 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-interface Collaborator {
+export interface Collaborator {
   name: string;
   email: string;
   phone: string;
   company: string;
 }
 
-interface CollaboratorsTableProps {
+export interface CollaboratorsTableProps {
   collaborators: Collaborator[];
 }
 
-const mockData: Collaborator[] = [
+export const mockData: Collaborator[] = [
   {
     name: "Jon Snow",
     email: "jon.snow@winterfell.com",
@@ -63,7 +63,6 @@ const CollaboratorsTable: React.FC<CollaboratorsTableProps> = () => {
     const fetchCollaborators = async () => {
       setLoading(true);
       try {
-        // Simulando un retraso en la carga
         await new Promise((resolve) => setTimeout(resolve, 1000));
         setCollaborators(mockData);
       } catch (error: any) {
