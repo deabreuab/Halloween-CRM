@@ -18,31 +18,51 @@ interface Participant {
   email: string;
   tickets: number;
 }
-interface ParticipantTableProps {
-  participants: Participant[];
-}
 
-const mockData: Participant[] = [
-  { name: "Jon Snow", email: "jon.snow@winterfell.com", tickets: 5 },
-  { name: "Cersei Lannister", email: "cersei@lannister.com", tickets: 2 },
-  { name: "Jaime Lannister", email: "jaime@lannister.com", tickets: 3 },
-];
-const ParticipantTable: React.FC<ParticipantTableProps> = ({
-  participants = mockData,
-}) => {
-  const [data, setData] = useState<Participant[]>(participants);
+const ParticipantTable: React.FC = () => {
+  const [data, setData] = useState<Participant[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchParticipants = async () => {
+      setLoading(true);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setData(mockData);
+        const token = localStorage.getItem("token"); // Si necesitas autenticación
+        const response = await fetch(
+          "http://localhost:8000/home/participant/",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Error al obtener los participantes");
+        }
+
+        const data = await response.json();
+        setData(data.participants || []); // Asegúrate de ajustar esto según la estructura de tu respuesta
       } catch (error: any) {
-        console.error("Error al cargar los colaboradores");
+        setError("Error al cargar los participantes");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchParticipants();
-  }, [participants]);
+  }, []);
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <TableContainer>
       <Table>
