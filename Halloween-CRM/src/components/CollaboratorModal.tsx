@@ -1,26 +1,26 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import Swal from "sweetalert2";
+import { Collaborator } from './CollaboratorTable';
+
 
 interface CollaboratorModalProps {
   open: boolean;
   onClose: () => void;
+  onSubmit: (collaborator: Omit<Collaborator, "_id">) => void;
 }
 
 const CollaboratorModal: React.FC<CollaboratorModalProps> = ({
   open,
   onClose,
+  onSubmit,
 }) => {
+  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const formJson = Object.fromEntries(formData.entries());
+    const formJson = Object.fromEntries(formData.entries()) as Omit<Collaborator, "_id">;
     console.log(formJson);
+    onSubmit(formJson);
 
     // Muestra un mensaje de éxito con SweetAlert2
     Swal.fire({
@@ -81,6 +81,15 @@ const CollaboratorModal: React.FC<CollaboratorModalProps> = ({
           label="Empresa"
           name="company"
           type="text"
+          fullWidth
+          variant="outlined"
+        />
+        <TextField
+          required
+          margin="dense"
+          label="Contraseña"
+          name="password"
+          type="password"
           fullWidth
           variant="outlined"
         />
