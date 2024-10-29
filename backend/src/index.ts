@@ -7,7 +7,7 @@ app.use(express.json())
 router(app);
 
 app.get("/", (req: Request, resp: Response) => {
-  resp.send("connection mongodb")
+  resp.send("connection mongodb moongose")
 });
 
 const startServer = async () =>{
