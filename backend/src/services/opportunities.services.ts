@@ -35,9 +35,9 @@ const updateAnOpportunity = async (id: string, photo: string, description: strin
 
 
 const getOpportunities = async () => {
-    const opportunities = await Opportunities.find()
+    return await Opportunities.find()
 
-    console.log('All opportunities:', opportunities)
+    // console.log('All opportunities:', opportunities)
 }
 
 const getAnOpportunity = async (id: string) => {
