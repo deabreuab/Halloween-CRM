@@ -98,7 +98,7 @@ const deleteParticipant = async (req: Request, res: Response) => {
         console.error("Error eliminando participante:", error);
         res.status(500).json({
             message: "Error eliminando participante",
-            error: error instanceof Error ? error.message : "Error desconocido",
+            error: error instanceof Error ? error.message : "Error desconocido!!!",
         });
     }
 };
