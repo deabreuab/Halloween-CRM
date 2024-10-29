@@ -7,11 +7,11 @@ const OpportunityModal = () => {
     html: `
       <input id="name" class="swal2-input" placeholder="Nombre">
       <input id="description" class="swal2-input" placeholder="Descripción">
-      <input id="type" class="swal2-input" placeholder="Tipo">
-      <input id="status" class="swal2-input" placeholder="Estado">
+      <input id="type" class="swal2-input" placeholder="Tipo de evento">
       <div>
-        <label><input type="radio" name="radio" value="Option1"> Opción 1</label>
-        <label><input type="radio" name="radio" value="Option2"> Opción 2</label>
+        <label><input type="radio" name="status" value="Pendiente"> Nueva</label>
+        <label><input type="radio" name="status" value="En Progreso"> En Progreso</label>
+        <label><input type="radio" name="status" value="Completado"> Completado</label>
       </div>
       <input id="start_date" class="swal2-input" type="date" placeholder="Fecha de Inicio">
       <input id="end_date" class="swal2-input" type="date" placeholder="Fecha de Cierre">
@@ -23,30 +23,58 @@ const OpportunityModal = () => {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
+      const selectedStatus = (
+        document.querySelector(
+          'input[name="status"]:checked'
+        ) as HTMLInputElement
+      )?.value;
+
+      const name = (document.getElementById("name") as HTMLInputElement).value;
+      const description = (
+        document.getElementById("description") as HTMLInputElement
+      ).value;
+      const type = (document.getElementById("type") as HTMLInputElement).value;
+      const start_date = (
+        document.getElementById("start_date") as HTMLInputElement
+      ).value;
+      const end_date = (document.getElementById("end_date") as HTMLInputElement)
+        .value;
+      const createBy = (document.getElementById("createBy") as HTMLInputElement)
+        .value;
+
+      if (
+        !name ||
+        !description ||
+        !type ||
+        !selectedStatus ||
+        !start_date ||
+        !end_date ||
+        !createBy
+      ) {
+        Swal.fire("Error", "Por favor, completa todos los campos.", "error");
+        return;
+      }
+
       const newOpportunity: Opportunity = {
-        name: (document.getElementById("name") as HTMLInputElement).value,
-        description: (
-          document.getElementById("description") as HTMLInputElement
-        ).value,
-        type: (document.getElementById("type") as HTMLInputElement).value,
-        status: (document.getElementById("status") as HTMLInputElement).value,
-        start_date: (document.getElementById("start_date") as HTMLInputElement)
-          .value,
-        end_date: (document.getElementById("end_date") as HTMLInputElement)
-          .value,
-        createBy: (document.getElementById("createBy") as HTMLInputElement)
-          .value,
+        name,
+        description,
+        type,
+        status: selectedStatus,
+        start_date,
+        end_date,
+        createBy,
       };
 
       console.log("nueva oportunidad", newOpportunity);
-      // deberia mostrar mensaje de exito
+
+      // Mostrar mensaje de éxito
       Swal.fire(
         "¡Guardado!",
         "Los cambios se han guardado con éxito.",
         "success"
       );
     } else if (result.isDismissed) {
-      // deberia mostrar mensaje de error
+      // Mostrar mensaje de información
       Swal.fire("Los cambios no se guardaron", "", "info");
     }
   });
