@@ -1,11 +1,16 @@
 import AddButton from "../components/AddButton";
 import Layout from "../components/Layout";
+import OpportunityModal from "../components/OpportunityModal";
 import OpportunityTable from "../components/OpportunityTable";
 
 import SearchBar from "../components/SearchBar";
 import { Box, Pagination } from "@mui/material";
 
 const OpportunityPage: React.FC = () => {
+  const handleAddOpportunity = () => {
+    OpportunityModal();
+  };
+
   return (
     <Layout>
       <Box sx={{ padding: 3 }}>
@@ -29,7 +34,7 @@ const OpportunityPage: React.FC = () => {
           }}
         >
           <SearchBar />
-          <AddButton label="Nueva Oportunidad" />
+          <AddButton label="Nueva Oportunidad" onClick={handleAddOpportunity} />
         </Box>
 
         <Box
