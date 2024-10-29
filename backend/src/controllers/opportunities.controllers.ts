@@ -6,13 +6,13 @@ const createOpportunityHandler: RequestHandler = async (req, res) => {
 
     try {
         const createdOpportunity = await createAnOpportunity(name, description, type, user_id, start_date, end_date, createBy, modifiedBy);
-        res.status(201).json({ message: "Opportunidad creada con éxito", created: createdOpportunity});
+        res.status(201).json({ message: "Opportunidad creada con éxito", created: createdOpportunity });
     } catch (error) {
         res.status(500).json({ message: "Error al crear la oportunidad", error });
     }
 }
 
-const updateOpportunityHandler: RequestHandler = async (req, res) =>{
+const updateOpportunityHandler: RequestHandler = async (req, res) => {
     const id = req.params.id as string;
     const { name, description, type, start_date, end_date, modifiedBy } = req.body;
 
@@ -20,7 +20,7 @@ const updateOpportunityHandler: RequestHandler = async (req, res) =>{
         const updatedOpportunity = await updateAnOpportunity(id, name, description, type, start_date, end_date, modifiedBy)
         res.status(200).json({ message: "Oportunidad actualizada con éxito", updatedOpportunity: updatedOpportunity });
     } catch (error) {
-        res.status(500).json({ message: "Error al actualizar la oportunidad", error }); 
+        res.status(500).json({ message: "Error al actualizar la oportunidad", error });
     }
 }
 
@@ -49,7 +49,7 @@ const deleteOpportunityHandler: RequestHandler = async (req, res) => {
     const id = req.params.id as string;
 
     try {
-       const deletedOpportunity = await deleteAnOpportunity(id);
+        const deletedOpportunity = await deleteAnOpportunity(id);
         res.status(200).json({ message: "Oportunidad eliminada con éxito", delete: deletedOpportunity });
     } catch (error) {
         res.status(500).json({ message: "Error al eliminar la oportunidad", error });
