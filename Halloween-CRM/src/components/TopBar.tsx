@@ -1,7 +1,27 @@
 import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+// import { deepOrange, deepPurple } from "@mui/material/colors";
+
 const TopBar: React.FC = () => {
   const drawerWidth = 240;
+  const userName = localStorage.getItem("userName");
+
+  const getInitials = (name: string | null) => {
+    if (!name) return "";
+    return name.charAt(0).toUpperCase();
+  };
+
+  const generateRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+  const initials = getInitials(userName);
+  const avatarColor = generateRandomColor();
+  
   return (
     <AppBar
       position="fixed"
@@ -17,7 +37,7 @@ const TopBar: React.FC = () => {
         <IconButton color="inherit">
           <NotificationsNoneIcon />
         </IconButton>
-        <Avatar />
+        <Avatar sx={{ bgcolor: avatarColor }}>{initials}</Avatar>
       </Toolbar>
     </AppBar>
   );
