@@ -1,7 +1,35 @@
 import {Box,TextField,Typography,Button} from "@mui/material";
-// import login from "../styles/Login.module.css";
-
+import { useState,FormEvent} from "react";
 export const Login = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+  const handleLogin = async(e: FormEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8000/home/user/login',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      })
+      const data = await response.json();
+      console.log("data",data)
+      if (response.ok) {
+        // Guardar el token en localStorage
+        localStorage.setItem('token', data.token);
+
+        // Establece la URL de redirección basada en el rol
+        if (data.user.role === 'admin' || data.user.role === 'collaborator') {
+          window.location.href = '/panel';
+        } 
+      } else {
+        setError(data.message || 'Error al iniciar sesión.');
+      }
+    } catch (error) {
+      setError('Error de conexión.');
+    }
+  }
   return (
     <Box
       component="main"
@@ -25,6 +53,7 @@ export const Login = () => {
       </Typography>
       <Box
         component="form"
+        onSubmit={handleLogin} 
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -44,6 +73,8 @@ export const Login = () => {
           label="Correo Electrónico"
           variant="filled"
           fullWidth
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
           sx={{
             input: { color: "white" }, 
             "& .MuiInputLabel-root": { color: "#9AA7B6" }, 
@@ -64,6 +95,8 @@ export const Login = () => {
           label="Contraseña"
           variant="filled"
           type="password"
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)}
           fullWidth
           sx={{
             input: { color: "white" }, 
@@ -80,7 +113,7 @@ export const Login = () => {
             },
           }}
         />
-        <Button variant="contained" fullWidth sx={{backgroundColor:"#9AA7B6",
+        <Button type="submit" variant="contained" fullWidth sx={{backgroundColor:"#9AA7B6",
             "&:hover": { backgroundColor: "#7B8E99" }
         }}>
           Iniciar Sesión
