@@ -27,9 +27,9 @@ export const authMiddleware = (secret: string) => (req: Request, resp: Response,
       console.log("hola3");
 
       const decodedToken = decoded as DecodedToken;
-      (req as any)._id = decodedToken._id;
-      (req as any).role = decodedToken.role;
-      (req as any).email = decodedToken.email
+      req.uid = decodedToken._id;
+      req.role = decodedToken.role;
+      req.email = decodedToken.email;
       console.log("🚀 ~ jwt.verify ~ decodedToken:", decodedToken)      
       next();
     });
@@ -38,21 +38,21 @@ export const authMiddleware = (secret: string) => (req: Request, resp: Response,
   }
 };
 
+export const isAuthenticated = (req: Request): boolean => !!req.uid;
 // Middleware para verificar si el usuario es administrador
 export const isAdmin = (req: Request, res: Response, next: NextFunction): void => {
   if (req.role === "admin") {
-    console.log("🚀 ~ isAdmin ~ req.role:", req.role)
     next();
   } else {
     res.status(401).json({ message: "No autorizado" });
   }
 };
-
-// // Middleware para requerir autenticación
-// export const requireAuth = (req: Request, resp: Response, next: NextFunction): void => {
-//   if (!req.uid) {
-//     resp.status(401).json({ message: "No autenticado" });
-//   } else {
-//     next();
-//   }
-// };
+// Middleware para requerir autenticación
+export const requireAuth = (req: Request, resp: Response, next: NextFunction): void => {
+  console.log(req.uid, "uid");
+  if (!req.uid) {
+    resp.status(401).json({ message: "No autenticado" });
+  } else {
+    next();
+  }
+};
