@@ -24,6 +24,21 @@ Este CRM es ideal para eventos de impacto social, ayudando a mantener todo organ
 - **Control de Eventos** 🎉
 - **Dashboard de Control** 🧙
 
+## 🎉 Sobre el Desafío
+
+El Impact Social Cup Hackathon nos retó a innovar, y así lo hicimos. Esta herramienta CRM, además de ser funcional, tiene un enfoque en mejorar la experiencia de eventos de impacto social. Fue emocionante enfrentar los desafíos, aprender nuevas herramientas como MongoDB y TypeScript, y ver cómo las ideas cobran vida en tiempo récord.
+
+## 🚧 Próximos Pasos
+Algunas funcionalidades en el radar para el futuro:
+
+- **Análisis Avanzado de Datos 📈**
+- **Automatización de Recordatorios ⏰**
+- **Notificaciones Personalizadas ✉️**
+- **Integración con IA 🧠: Usar OpenAI para recomendaciones personalizadas.**
+
+## ✨ Un Toque Personal
+Trabajar en Halloween CRM fue como un maratón de película de terror, ¡intenso, pero emocionante! Cada día, junto al equipo, exploramos herramientas, resolvimos problemas, y logramos una app que puede marcar la diferencia en eventos sociales. Y, por supuesto, lo hicimos en modo Halloween 🎃👻. ¡Espero que disfrutes explorando el proyecto tanto como nosotros disfrutamos creándolo!
+
 ## 📂 Estructura del Proyecto
 
 ```plaintext
@@ -55,20 +70,6 @@ Halloween-CRM
 ├── README.md
 └── package.json
 
-## 🎉 Sobre el Desafío
-
-El Impact Social Cup Hackathon nos retó a innovar, y así lo hicimos. Esta herramienta CRM, además de ser funcional, tiene un enfoque en mejorar la experiencia de eventos de impacto social. Fue emocionante enfrentar los desafíos, aprender nuevas herramientas como MongoDB y TypeScript, y ver cómo las ideas cobran vida en tiempo récord.
-
-## 🚧 Próximos Pasos
-Algunas funcionalidades en el radar para el futuro:
-
-- **Análisis Avanzado de Datos 📈**
-- **Automatización de Recordatorios ⏰**
-- **Notificaciones Personalizadas ✉️**
-- **Integración con IA 🧠: Usar OpenAI para recomendaciones personalizadas.**
-
-## ✨ Un Toque Personal
-Trabajar en Halloween CRM fue como un maratón de película de terror, ¡intenso, pero emocionante! Cada día, junto al equipo, exploramos herramientas, resolvimos problemas, y logramos una app que puede marcar la diferencia en eventos sociales. Y, por supuesto, lo hicimos en modo Halloween 🎃👻. ¡Espero que disfrutes explorando el proyecto tanto como nosotros disfrutamos creándolo!
 
 
 
