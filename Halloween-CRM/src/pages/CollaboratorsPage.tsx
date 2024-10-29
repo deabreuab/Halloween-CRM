@@ -1,10 +1,21 @@
+import { useState } from "react";
 import AddButton from "../components/AddButton";
 import CollaboratorsTable from "../components/CollaboratorTable";
 import Layout from "../components/Layout";
 import SearchBar from "../components/SearchBar";
 import { Box, Pagination } from "@mui/material";
+import CollaboratorModal from "../components/CollaboratorModal";
 
 const CollaboratorsPage: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false); // Estado para controlar la apertura del modal
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
   return (
     <Layout>
       <Box sx={{ padding: 3 }}>
@@ -28,7 +39,7 @@ const CollaboratorsPage: React.FC = () => {
           }}
         >
           <SearchBar />
-          <AddButton label="Nuevo colaborador" />
+          <AddButton label="Nuevo colaborador" onClick={handleOpenModal} />
         </Box>
         <Box
           sx={{
@@ -42,6 +53,7 @@ const CollaboratorsPage: React.FC = () => {
           <Pagination />
         </Box>
       </Box>
+      <CollaboratorModal open={openModal} onClose={handleCloseModal} />
     </Layout>
   );
 };
