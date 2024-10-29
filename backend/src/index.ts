@@ -9,8 +9,8 @@ const PORT: number = parseInt(process.env.PORT || '3000');
 
 app.use(cors());
 app.use(express.json())
-const secret: string = process.env.secret || 'secret';
-app.use(authMiddleware(secret));
+// const secret: string = process.env.JWT_SECRET || 'secret';
+app.use(authMiddleware);
 router(app);
 
 app.get("/", (req: Request, resp: Response) => {
