@@ -42,24 +42,24 @@ Trabajar en Halloween CRM fue como un maratón de película de terror, ¡intenso
 ## 📂 Estructura del Proyecto
 
 ```plaintext
-Halloween-CRM
-├── backend
-│   ├── build
-│   ├── config
-│   ├── controllers
-│   ├── interface
-│   ├── middleware
-│   ├── models
-│   ├── routes
-│   ├── services
-│   └── types
+📂Halloween-CRM
+├── 📂backend
+│   ├── 📂build
+│   ├── 📂config
+│   ├── 📂controllers 
+│   ├── 📂interface
+│   ├── 📂middleware
+│   ├── 📂models
+│   ├── 📂routes
+│   ├── 📂services
+│   └── 📂types
 │       ├── connection.ts
 │       └── index.ts
-├── frontend
-│   ├── public
-│   └── src
-│       ├── components
-│       ├── pages
+├── 📂frontend
+│   ├── 📂public
+│   └── 📂src
+│       ├── 📂components
+│       ├── 📂pages
 │       ├── App.tsx
 │       ├── index.css
 │       ├── main.tsx
@@ -70,17 +70,6 @@ Halloween-CRM
 ├── README.md
 └── package.json
 
-
-
-
-📚 Estructura del Proyecto
-
-📁 Halloween-CRM
-├── 📂 controllers        # Controladores para manejar las solicitudes
-├── 📂 models             # Modelos de datos para MongoDB
-├── 📂 services           # Lógica de negocio en servicios separados
-├── 📂 routes             # Rutas de la API
-└── 📂 utils              # Utilidades varias para el proyecto
 
 
 
