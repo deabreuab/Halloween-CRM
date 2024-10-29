@@ -8,7 +8,59 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Google, Facebook } from "@mui/icons-material";
+import { useState,ChangeEvent, FormEvent} from "react";
+import { useNavigate } from "react-router-dom";
+
 export const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    role: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8000/home/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Usuario registrado con éxito");
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          role: "",
+          password: "",
+        });
+
+        navigate("/login");
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error("Error registrando el usuario:", error);
+    }
+  };
   return (
     <Box
       component="main"
@@ -38,6 +90,7 @@ export const Register = () => {
       </Typography>
       <Box
         component="form"
+        onSubmit={handleSubmit}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -55,6 +108,9 @@ export const Register = () => {
         <TextField
           label="Nombre"
           variant="filled"
+          value={formData.name}
+          name="name"
+          onChange={handleChange}
           fullWidth
           sx={{
             input: { color: "white" },
@@ -74,6 +130,29 @@ export const Register = () => {
           label="Celular"
           variant="filled"
           fullWidth
+          value={formData.phone}
+          name="phone"
+          onChange={handleChange}
+          sx={{
+            input: { color: "white" },
+            "& .MuiInputLabel-root": { color: "white" },
+            "& .MuiFilledInput-underline:before": {
+              borderBottomColor: "white",
+            },
+            "& .MuiFilledInput-underline:after": { borderBottomColor: "white" },
+            "& .Mui-focused": {
+              color: "white",
+              "& .MuiInputLabel-root": { color: "white" },
+            },
+          }}
+        />
+        <TextField
+          label="Correo Electrónico"
+          variant="filled"
+          fullWidth
+          value={formData.email}
+          name="email"
+          onChange={handleChange}
           sx={{
             input: { color: "white" },
             "& .MuiInputLabel-root": { color: "white" },
@@ -93,6 +172,9 @@ export const Register = () => {
             label="Compañia"
             variant="filled"
             fullWidth
+            value={formData.company}
+            name="company"
+            onChange={handleChange}
             sx={{
               flex: 1,
               input: { color: "white" },
@@ -113,6 +195,9 @@ export const Register = () => {
             label="Rol"
             variant="filled"
             fullWidth
+            value={formData.role}
+            name="role"
+            onChange={handleChange}
             select
             defaultValue=""
             sx={{
@@ -131,8 +216,8 @@ export const Register = () => {
               },
             }}
           >
-            <MenuItem value="Administrador">Administrador</MenuItem>
-            <MenuItem value="Colaborador">Colaborador</MenuItem>
+            <MenuItem value="admin">Administrador</MenuItem>
+            <MenuItem value="collaborator">Colaborador</MenuItem>
           </TextField>
         </Box>
 
@@ -140,7 +225,10 @@ export const Register = () => {
           label="Contraseña"
           variant="filled"
           type="password"
+          name="password"
           fullWidth
+          value={formData.password}
+          onChange={handleChange}
           sx={{
             input: { color: "white" },
             "& .MuiInputLabel-root": { color: "white" },
@@ -158,6 +246,7 @@ export const Register = () => {
         <Button
           variant="contained"
           fullWidth
+          type="submit"
           sx={{
             backgroundColor: "#9AA7B6",
             color: "white",

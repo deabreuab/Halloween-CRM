@@ -31,6 +31,7 @@ export const Login = () => {
       console.log("data", data);
       if (response.ok) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userName", data.user.name);
 
         if (data.user.role === "admin" || data.user.role === "collaborator") {
           window.location.href = "/panel";
