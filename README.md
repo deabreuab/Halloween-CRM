@@ -69,9 +69,3 @@ Trabajar en Halloween CRM fue como un maratón de película de terror, ¡intenso
 ├── .gitignore
 ├── README.md
 └── package.json
-
-
-
-
-
-
