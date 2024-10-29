@@ -50,6 +50,7 @@ export interface Itasks{
   title: string;
   description: string;
   status: string;
+  assigned_to:mongoose.Types.ObjectId[];
   due_date: Date;
   assigned_date: Date;
   createdBy?:string;

@@ -1,16 +1,30 @@
 import { Tasks } from "../models/tasks.model";
 import { Itasks } from "../interface/index.interface";
 
-const createATask = async (user_id: string, opportunity_id: string, title: string, description: string, due_date: Date) => {}
+const createATask = async (taskData: Itasks) => {
+    const newTask = new Tasks(taskData);
+    return newTask.save();
+};
 
-const getTasks = async () => {}
+const getTasks = async () => {
+    return await Tasks.find()
+        .populate('user_id')
+        .populate('opportunity_id')
+        .populate('assigned_to');
+    ;
+};
 
-const getTasksByOpportunity = async (opportunity_id: string) => {}
+const getTasksByOpportunity = async (opportunity_id: string) => {
+    return await Tasks.findById({ opportunity_id });
+};
 
-const updateATask = async (id: string, title: string, description: string, due_date: Date, status: string, modifiedBy: string) => {}
+const updateATask = async (id: string, updateData: Partial<Itasks>) => {
+    return await Tasks.findByIdAndUpdate(id, updateData, { new: true });
+};
 
-const deleteATask = async (id: string) => {}
+const deleteATask = async (id: string) => {
+    return await Tasks.findByIdAndDelete(id);
+};
 
 
 export { createATask, getTasksByOpportunity, updateATask, deleteATask, getTasks };
-
