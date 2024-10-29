@@ -8,3 +8,5 @@ tasksRouter.get('/', getTasksHandler)
 tasksRouter.get('/opportunity/:opportunityId', getTasksByOpportunityHandler)
 tasksRouter.put('/:id', updateTaskHandler)
 tasksRouter.delete('/:id', deleteTaskHandler)
+
+export { tasksRouter }
