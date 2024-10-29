@@ -1,12 +1,21 @@
-import { Box, TextField, Typography, Button, IconButton, InputAdornment} from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import { useState, FormEvent } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -33,6 +42,11 @@ export const Login = () => {
       setError("Error de conexión.");
     }
   };
+
+  const handleRegisterClick = () => {
+    navigate("/register"); // Navigate to the registration page
+  };
+
   return (
     <Box
       component="main"
@@ -54,8 +68,23 @@ export const Login = () => {
       >
         Iniciar Sesión
       </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 2, color: "white" }}>
-        ¿No tienes una cuenta? Registrate
+      <Typography
+        variant="body1"
+        sx={{ marginBottom: 2, color: "white" }}
+      >
+        ¿No tienes una cuenta?
+        <Typography
+          component="span"
+          sx={{
+            marginLeft:0.5,
+            textDecoration: "underline",
+            color: "white",
+            cursor: "pointer",
+          }}
+          onClick={handleRegisterClick}
+        >
+          Registrate
+        </Typography>
       </Typography>
       <Box
         component="form"
@@ -123,7 +152,7 @@ export const Login = () => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label={
-                    showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'
+                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
                   }
                   onClick={handleClickShowPassword}
                   edge="end"
