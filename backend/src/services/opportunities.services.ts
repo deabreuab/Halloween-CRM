@@ -2,10 +2,10 @@ import { Opportunities } from "../models/opportunities.model";
 import { IOpportunities } from "../interface/index.interface";
 import { ObjectId } from "mongoose";
 
-const createAnOpportunity = async (photo: string, description: string, type: string, user_id: ObjectId, start_date: Date, end_date: Date, createBy: string, modifiedBy: string) => {
+const createAnOpportunity = async (name: string, description: string, type: string, user_id: ObjectId, start_date: Date, end_date: Date, createBy: string, modifiedBy: string) => {
 
     const opportunity = new Opportunities({
-        photo,
+        name,
         description,
         type,
         user_id,
@@ -19,9 +19,9 @@ const createAnOpportunity = async (photo: string, description: string, type: str
 
 }
 
-const updateAnOpportunity = async (id: string, photo: string, description: string, type: string, start_date: Date, end_date: Date, modifiedBy: string) => {
+const updateAnOpportunity = async (id: string, name: string, description: string, type: string, start_date: Date, end_date: Date, modifiedBy: string) => {
     const opportunity = await Opportunities.findByIdAndUpdate(id, {
-        photo,
+        name,
         description,
         type,
         start_date,

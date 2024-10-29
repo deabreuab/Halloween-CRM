@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import { IOpportunities } from "../interface/index.interface";
   
 const opportunitiesSchema = new Schema<IOpportunities>({
-    photo: { type: String, default: 'default_photo.jpg' },
+    name: { type: String, required: true},
     description: { type: String, required: true },
     type: { type: String, required: true},
     user_id: {  type: Schema.Types.ObjectId, required: true },
