@@ -3,8 +3,16 @@ import { ThemeProvider } from "@mui/material/styles";
 import GroupIcon from "@mui/icons-material/Group";
 interface PanelProps {
   totalCollaborators: number;
+  totalParticipants: number;
+  tickets: number;
+  opportunity: number;
 }
-export const Resume: React.FC<PanelProps> = ({ totalCollaborators }) => {
+export const Resume: React.FC<PanelProps> = ({
+  totalCollaborators,
+  totalParticipants,
+  tickets,
+  opportunity,
+}) => {
   return (
     <ThemeProvider
       theme={{
@@ -43,7 +51,7 @@ export const Resume: React.FC<PanelProps> = ({ totalCollaborators }) => {
               Total Participantes
             </h2>
             <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
-              {totalCollaborators}
+              {totalParticipants}
             </h3>
           </Box>
           <Box sx={{ width: 100, color: "white" }}>
@@ -75,7 +83,7 @@ export const Resume: React.FC<PanelProps> = ({ totalCollaborators }) => {
               Total de Colaboradores
             </h2>
             <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
-              3
+              {totalCollaborators}
             </h3>
           </Box>
         </Box>
@@ -103,7 +111,7 @@ export const Resume: React.FC<PanelProps> = ({ totalCollaborators }) => {
               Oportunidades en proceso
             </h2>
             <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
-              30%
+              {opportunity}
             </h3>
           </Box>
         </Box>
@@ -132,7 +140,7 @@ export const Resume: React.FC<PanelProps> = ({ totalCollaborators }) => {
               Entradas vendidas
             </h2>
             <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
-              30
+              {tickets}
             </h3>
           </Box>
         </Box>
