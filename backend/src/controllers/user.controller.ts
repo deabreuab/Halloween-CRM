@@ -52,11 +52,14 @@ export const loginUser = async (req: Request, resp: Response): Promise<any> => {
             return resp.status(401).json({ message: "Variable de entorno JWT_SECRET no configurada" });
         }
         const payload = {
-            email: findUser.email,
+            id: findUser._id,
             role: findUser.role
         };
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
-        resp.status(200).json({message: "Acceso verificado", token});
+        resp.status(200).json({message: "Acceso verificado", token,user: {
+            id: findUser._id,
+            role: findUser.role
+        }});
     } catch (error) {
         resp.status(500).json({message: "Error del servidor"})
     }
