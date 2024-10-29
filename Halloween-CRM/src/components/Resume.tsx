@@ -1,8 +1,10 @@
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import GroupIcon from "@mui/icons-material/Group";
- 
-export const Resume = () => {
+interface PanelProps {
+  totalCollaborators: number;
+}
+export const Resume: React.FC<PanelProps> = ({ totalCollaborators }) => {
   return (
     <ThemeProvider
       theme={{
@@ -19,6 +21,7 @@ export const Resume = () => {
           sx={{
             width: 250,
             height: 150,
+            alignItems: "center",
             borderRadius: 1,
             bgcolor: "primary.main",
             display: "flex",
@@ -30,51 +33,109 @@ export const Resume = () => {
           }}
         >
           <Box sx={{ width: 125 }}>
-            <h2 style={{ color: "white", fontFamily: "Roboto, sans-serif" , fontSize: "1.2rem"}}>
+            <h2
+              style={{
+                color: "white",
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "1.2rem",
+              }}
+            >
               Total Participantes
             </h2>
             <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
-              25
+              {totalCollaborators}
             </h3>
           </Box>
-          <Box sx={{ width: 125 }}>
-            <GroupIcon sx={{ fontSize: 50 }}/>
+          <Box sx={{ width: 100, color: "white" }}>
+            <GroupIcon sx={{ fontSize: 50 }} />
           </Box>
         </Box>
- 
+
         <Box
           sx={{
             width: 250,
             height: 150,
             borderRadius: 1,
+            display: "flex",
+            justifyContent: "center",
             bgcolor: "primary.main",
             "&:hover": {
               bgcolor: "primary.dark",
             },
           }}
-        ></Box>
+        >
+          <Box sx={{ width: 125 }}>
+            <h2
+              style={{
+                color: "white",
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "1.2rem",
+              }}
+            >
+              Total de Colaboradores
+            </h2>
+            <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
+              3
+            </h3>
+          </Box>
+        </Box>
         <Box
           sx={{
             width: 250,
             height: 150,
             borderRadius: 1,
+            display: "flex",
+            justifyContent: "center",
             bgcolor: "primary.main",
             "&:hover": {
               bgcolor: "primary.dark",
             },
           }}
-        ></Box>
+        >
+          <Box sx={{ width: 125 }}>
+            <h2
+              style={{
+                color: "white",
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "1.2rem",
+              }}
+            >
+              Oportunidades en proceso
+            </h2>
+            <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
+              30%
+            </h3>
+          </Box>
+        </Box>
         <Box
           sx={{
             width: 250,
             height: 150,
             borderRadius: 1,
+            display: "flex",
+            justifyContent: "center",
             bgcolor: "primary.main",
             "&:hover": {
               bgcolor: "primary.dark",
             },
           }}
-        ></Box>
+        >
+          {" "}
+          <Box sx={{ width: 125 }}>
+            <h2
+              style={{
+                color: "white",
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "1.2rem",
+              }}
+            >
+              Entradas vendidas
+            </h2>
+            <h3 style={{ color: "white", fontFamily: "Roboto, sans-serif" }}>
+              30
+            </h3>
+          </Box>
+        </Box>
       </Box>
     </ThemeProvider>
   );

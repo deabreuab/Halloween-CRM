@@ -21,69 +21,58 @@ export interface Opportunity {
   end_date: string;
   createBy: string;
 }
-
-const mockOpportunities: Opportunity[] = [
-  {
-    name: "Proyecto Alpha",
-    description: "Prospecto con potencial de nuevo cliente.",
-    type: "Nuevo Cliente",
-    status: "En Progreso",
-    start_date: "2024-01-15",
-    end_date: "2024-03-20",
-    createBy: "Carlos Mendoza",
-  },
-  {
-    name: "Expansión Beta",
-    description: "Expansión de servicios para cuenta actual.",
-    type: "Expansión de Cuenta",
-    status: "Completada",
-    start_date: "2023-10-05",
-    end_date: "2024-01-10",
-    createBy: "Lucía Fernández",
-  },
-  {
-    name: "Renovación Gamma",
-    description: "Renovación anual del contrato.",
-    type: "Renovación",
-    status: "Pendiente",
-    start_date: "2024-02-01",
-    end_date: "2024-06-30",
-    createBy: "Miguel Hernández",
-  },
-  {
-    name: "Desarrollo Delta",
-    description: "Desarrollo de nueva herramienta personalizada.",
-    type: "Nuevo Proyecto",
-    status: "En Progreso",
-    start_date: "2024-03-01",
-    end_date: "2024-05-30",
-    createBy: "Sofía Ruiz",
-  },
-  {
-    name: "Proyecto Épsilon",
-    description: "Recuperación de cliente recurrente.",
-    type: "Cliente Recurrente",
-    status: "Cancelada",
-    start_date: "2024-01-20",
-    end_date: "2024-02-15",
-    createBy: "José Gómez",
-  },
-];
-
+const formatDate = (start_date: string) => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return new Date(start_date).toLocaleDateString(undefined, options);
+};
 const OpportunityTable: React.FC = () => {
-  const [data, setData] = useState<Opportunity[]>(mockOpportunities);
+  const [data, setData] = useState<Opportunity[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchOpportunities = async () => {
+      setLoading(true);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setData(mockOpportunities);
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+          "http://localhost:8000/home/opportunities/",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Error al obtener las oportunidades");
+        }
+        const data = await response.json();
+        setData(data.opportunities || []);
+        console.log(data);
       } catch (error: any) {
-        console.error("Error al cargar los colaboradores");
+        setError("Error al cargar las oportunidades");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchOpportunities();
   }, []);
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <TableContainer>
       <Table>
@@ -106,8 +95,8 @@ const OpportunityTable: React.FC = () => {
               <TableCell>{opportunity.description}</TableCell>
               <TableCell>{opportunity.type}</TableCell>
               <TableCell>{opportunity.status}</TableCell>
-              <TableCell>{opportunity.start_date}</TableCell>
-              <TableCell>{opportunity.end_date}</TableCell>
+              <TableCell>{formatDate(opportunity.start_date)}</TableCell>
+              <TableCell>{formatDate(opportunity.end_date)}</TableCell>
               <TableCell>{opportunity.createBy}</TableCell>
               <TableCell id="acciones">
                 <IconButton>

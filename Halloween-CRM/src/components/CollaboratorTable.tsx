@@ -60,6 +60,7 @@ const CollaboratorsTable: React.FC<CollaboratorsTableProps> = () => {
   const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchCollaborators = async () => {
       setLoading(true);
