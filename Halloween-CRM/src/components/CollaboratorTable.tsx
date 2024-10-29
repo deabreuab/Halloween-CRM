@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -18,87 +18,58 @@ export interface Collaborator {
   email: string;
   phone: string;
   company: string;
+  password?:string;
 }
 
 export interface CollaboratorsTableProps {
   collaborators: Collaborator[];
+  onDelete: (id: string) => void;
 }
 
-// export const mockData: Collaborator[] = [
-//   {
-//     name: "Jon Snow",
-//     email: "jon.snow@winterfell.com",
-//     phone: "123-456-7890",
-//     company: "Night's Watch",
-//   },
-//   {
-//     name: "Cersei Lannister",
-//     email: "cersei@lannister.com",
-//     phone: "098-765-4321",
-//     company: "Lannister Inc.",
-//   },
-//   {
-//     name: "Jaime Lannister",
-//     email: "jaime@lannister.com",
-//     phone: "234-567-8901",
-//     company: "Lannister Inc.",
-//   },
-//   {
-//     name: "Arya Stark",
-//     email: "arya@stark.com",
-//     phone: "345-678-9012",
-//     company: "Stark Enterprises",
-//   },
-//   {
-//     name: "Daenerys Targaryen",
-//     email: "daenerys@targaryen.com",
-//     phone: "456-789-0123",
-//     company: "Targaryen LLC",
-//   },
-// ];
-const CollaboratorsTable: React.FC<CollaboratorsTableProps> = () => {
-  const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+const CollaboratorsTable: React.FC<CollaboratorsTableProps> = ({collaborators,
+  onDelete}) => {
+  // const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
+  // const [loading, setLoading] = useState<boolean>(false);
+  // const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchCollaborators = async () => {
-      setLoading(true);
-      try {
-        const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const fetchCollaborators = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const token = localStorage.getItem("token");
 
-        const response = await fetch("http://localhost:8000/home/user", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error al obtener los colaboradores");
-        }
+  //       const response = await fetch("http://localhost:8000/home/user", {
+  //         method: "GET",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+  //       if (!response.ok) {
+  //         throw new Error("Error al obtener los colaboradores");
+  //       }
 
-        const data = await response.json();
+  //       const data = await response.json();
 
-        setCollaborators(data.findUser);
-        console.log("data:", data);
-      } catch (error: any) {
-        setError("Error al cargar los colaboradores");
-      } finally {
-        setLoading(false);
-      }
-    };
+  //       setCollaborators(data.findUser);
+  //       console.log("data:", data);
+  //     } catch (error: any) {
+  //       setError("Error al cargar los colaboradores");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchCollaborators();
-  }, []);
+  //   fetchCollaborators();
+  // }, []);
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
+  // if (loading) {
+  //   return <div>Cargando...</div>;
+  // }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
   return (
     <TableContainer>
       <Table>
@@ -125,7 +96,7 @@ const CollaboratorsTable: React.FC<CollaboratorsTableProps> = () => {
                 <IconButton>
                   <EditIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => onDelete(collaborator._id)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
