@@ -55,7 +55,7 @@ export const loginUser = async (req: Request, resp: Response): Promise<any> => {
             email: findUser.email,
             role: findUser.role
         };
-        const token = await jwt.sign(payload, process.env.JWT_SECRET);
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
         resp.status(200).json({message: "Acceso verificado", token});
     } catch (error) {
         resp.status(500).json({message: "Error del servidor"})
