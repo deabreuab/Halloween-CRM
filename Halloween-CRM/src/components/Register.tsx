@@ -31,7 +31,7 @@ export const Register = () => {
   const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/home/user", {
+      const response = await fetch("https://halloween-crm-qjpe.vercel.app/home/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const Register = () => {
         width: "100vw",
         height: "100vh",
         backgroundColor: "#49545D",
-        clipPath: "polygon(8% 12%, 100% 0%, 74% 100%, 14% 88%)",
+        clipPath: "polygon(8% 5%, 100% 0%, 74% 100%, 14% 88%)",
         position: "fixed",
         display: "flex",
         flexDirection: "column",
