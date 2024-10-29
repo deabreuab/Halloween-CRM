@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string | null>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -22,11 +22,14 @@ export const Login = () => {
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://halloween-crm-qjpe.vercel.app/home/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://halloween-crm-qjpe.vercel.app/home/user/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const data = await response.json();
       console.log("data", data);
       if (response.ok) {
@@ -40,6 +43,7 @@ export const Login = () => {
         setError(data.message || "Error al iniciar sesión.");
       }
     } catch (error) {
+      console.log(error);
       setError("Error de conexión.");
     }
   };
@@ -69,15 +73,12 @@ export const Login = () => {
       >
         Iniciar Sesión
       </Typography>
-      <Typography
-        variant="body1"
-        sx={{ marginBottom: 2, color: "white" }}
-      >
+      <Typography variant="body1" sx={{ marginBottom: 2, color: "white" }}>
         ¿No tienes una cuenta?
         <Typography
           component="span"
           sx={{
-            marginLeft:0.5,
+            marginLeft: 0.5,
             textDecoration: "underline",
             color: "white",
             cursor: "pointer",
@@ -87,6 +88,11 @@ export const Login = () => {
           Registrate
         </Typography>
       </Typography>
+      {error && (
+        <Typography variant="body2" sx={{ color: "red", marginBottom: 2 }}>
+          {error}
+        </Typography>
+      )}
       <Box
         component="form"
         onSubmit={handleLogin}
