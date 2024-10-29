@@ -11,6 +11,30 @@ const comparePassword = async (password:string, passwordHash:string) =>{
     return await bcrypt.compare(password, passwordHash);
 }
 
+
+export const registerUser = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const regexEmail = /[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}/;
+        const { name, email, password, phone, company, role } = req.body;
+        if(!name ||!email ||!password ||!phone){
+            return res.status(400).json({ message: "Nombre, correo electrónico, teléfono, contraseña y compañía son campos obligatorios" });
+        };
+        if (!regexEmail.test(email)) {
+            return res.status(400).json("Correo electrónico inválido");
+        };
+        const findUser = await Users.findOne({email: email}).exec();
+        if (findUser) {
+            return res.status(409).json({ message: "Correo electrónico ya registrado" });
+        };
+        const newPassword = await encryptedPassword(password);
+        const newUser = new Users({name: name, email:email, password: newPassword, phone: phone, company: company, role: role});
+        await newUser.save();
+        res.status(201).json({ message: "Usuario registrado exitosamente", newUser });
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
 export const createUser = async (req: Request, resp: Response): Promise<any> => {
     try {
         const regexEmail = /[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}/;

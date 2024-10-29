@@ -17,7 +17,7 @@ const CollaboratorsPage: React.FC = () => {
   const fetchCollaborators = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8000/home/user", {
+      const response = await fetch("https://halloween-crm-qjpe.vercel.app/home/user", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ const CollaboratorsPage: React.FC = () => {
     newCollaborator: Omit<Collaborator, "_id">
   ) => {
     const token = localStorage.getItem("token");
-    const response = await fetch("http://localhost:8000/home/user/", {
+    const response = await fetch("https://halloween-crm-qjpe.vercel.app/home/user/", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ const CollaboratorsPage: React.FC = () => {
 
   const deleteCollaborator = async (id: string) => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`http://localhost:8000/home/user/${id}`, {
+    const response = await fetch(`https://halloween-crm-qjpe.vercel.app/home/user/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
