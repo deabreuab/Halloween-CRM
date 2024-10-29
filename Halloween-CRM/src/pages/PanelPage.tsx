@@ -1,6 +1,9 @@
 import Layout from "../components/Layout";
-
 import { Box } from "@mui/material";
+import { Resume } from "../components/Resume";
+import { Calendar } from "../components/Calendar";
+import { TaskStatusPie } from "../components/TaskStatusPie"
+ import { OpportunityChart } from "../components/OpportunityChart"
 
 const PanelPage: React.FC = () => {
   return (
@@ -17,6 +20,12 @@ const PanelPage: React.FC = () => {
         >
           Panel
         </h1>
+      </Box>
+      <Box>
+        <Resume />
+        <Calendar/>
+        <TaskStatusPie/>
+    <OpportunityChart/>
       </Box>
     </Layout>
   );
