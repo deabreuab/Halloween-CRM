@@ -88,29 +88,6 @@ export const Register = () => {
           }}
         />
 
-        {/* <TextField
-          label="Compañía"
-          variant="filled"
-          fullWidth
-          select
-          defaultValue=""
-          sx={{
-            "& .MuiInputLabel-root": { color: "white" },
-            "& .MuiFilledInput-underline:before": {
-              borderBottomColor: "white",
-            },
-            "& .MuiFilledInput-underline:after": { borderBottomColor: "white" },
-            "& .MuiSelect-select": { color: "white" },
-            "& .Mui-focused": {
-              color: "white",
-              "& .MuiInputLabel-root": { color: "white" }
-            },
-          }}
-        >
-          <MenuItem value="Red">Administrador</MenuItem>
-          <MenuItem value="Blue">Colaborador</MenuItem>
-        </TextField> */}
-
         <Box sx={{ display: "flex", gap: 2 }}>
           <TextField
             label="Compañia"
