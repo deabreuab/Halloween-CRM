@@ -11,7 +11,7 @@ import CollaboratorModal from "../components/CollaboratorModal";
 
 const CollaboratorsPage: React.FC = () => {
   const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
-  // const [selectedCollaborator, setSelectedCollaborator] = useState<Collaborator | null>(null);
+  const [selectedCollaborator, setSelectedCollaborator] = useState<Collaborator | null>(null);
   const [openModal, setOpenModal] = useState(false); // Estado para controlar la apertura del modal
 
   const fetchCollaborators = async () => {
@@ -53,24 +53,25 @@ const CollaboratorsPage: React.FC = () => {
     handleCloseModal();
   };
 
-  // const editCollaborator = async (updatedCollaborator: Omit<Collaborator, "_id"> & { _id: string }) => {
-  //   const token = localStorage.getItem("token");
-  //   const response = await fetch(`http://localhost:8000/home/user/${updatedCollaborator._id}`, {
-  //     method: "PUT", // Usa PUT para actualizar
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(updatedCollaborator),
-  //   });
+  const editCollaborator = async (updatedCollaborator: Collaborator) => {
+    const { _id, ...rest } = updatedCollaborator;
+    const token = localStorage.getItem("token");
+    const response = await fetch(`https://halloween-crm-qjpe.vercel.app/home/user/${_id}`, {
+      method: "PUT", 
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(rest),
+    });
 
-  //   if (!response.ok) {
-  //     const errorData = await response.json();
-  //     throw new Error(errorData.message || "Error al actualizar el colaborador");
-  //   }
-  //   await fetchCollaborators();
-  //   handleCloseEditModal();
-  // };
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Error al actualizar el colaborador");
+    }
+    await fetchCollaborators();
+    handleCloseModal();
+  };
 
   const deleteCollaborator = async (id: string) => {
     const token = localStorage.getItem("token");
@@ -90,13 +91,14 @@ const CollaboratorsPage: React.FC = () => {
     fetchCollaborators();
   }, []);
 
-  const handleOpenModal = () => {
-    // setSelectedCollaborator(null);
+  const handleOpenModal = (collaborator: Collaborator | null = null) => {
+    setSelectedCollaborator(collaborator);
     setOpenModal(true);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
+    setSelectedCollaborator(null);
   };
 
   
@@ -123,7 +125,7 @@ const CollaboratorsPage: React.FC = () => {
           }}
         >
           <SearchBar />
-          <AddButton label="Nuevo colaborador" onClick={handleOpenModal} />
+          <AddButton label="Nuevo colaborador" onClick={() => handleOpenModal()} />
         </Box>
         <Box
           sx={{
@@ -136,6 +138,7 @@ const CollaboratorsPage: React.FC = () => {
           <CollaboratorsTable
             collaborators={collaborators}
             onDelete={deleteCollaborator}
+            onEdit={handleOpenModal}
           />
           <Pagination />
         </Box>
@@ -143,7 +146,8 @@ const CollaboratorsPage: React.FC = () => {
       <CollaboratorModal
         open={openModal}
         onClose={handleCloseModal}
-        onSubmit={createCollaborator}
+        collaborator={selectedCollaborator}
+        onSubmit={selectedCollaborator ? editCollaborator : createCollaborator}
       />
     </Layout>
   );
